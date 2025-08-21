@@ -13,6 +13,7 @@ import ProductPage from './components/ProductPage';
 import DigitalStore from './components/DigitalStore';
 import NCSellerPage from './components/NCSellerPage';
 import SellerDashboard from './components/SellerDashboard';
+import AdminPanel from './components/AdminPanel';
 import './App.css';
 
 function HomePage() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/nc-seller" element={<NCSellerPage />} />
           <Route path="/seller-dashboard" element={<SellerDashboard />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
         <Footer />
       </div>
