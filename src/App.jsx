@@ -10,6 +10,9 @@ import Testimonials from './components/Testimonials';
 import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 import ProductPage from './components/ProductPage';
+import DigitalStore from './components/DigitalStore';
+import NCSellerPage from './components/NCSellerPage';
+import SellerDashboard from './components/SellerDashboard';
 import './App.css';
 
 function HomePage() {
@@ -33,7 +36,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/store" element={<DigitalStore />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/nc-seller" element={<NCSellerPage />} />
+          <Route path="/seller-dashboard" element={<SellerDashboard />} />
         </Routes>
         <Footer />
       </div>

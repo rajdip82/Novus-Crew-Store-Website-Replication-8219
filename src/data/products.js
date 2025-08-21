@@ -1,0 +1,275 @@
+export const digitalProducts = [
+  // Software & Subscriptions
+  {
+    id: 1,
+    name: 'Canva Premium 1 Year',
+    price: 89,
+    originalPrice: 120,
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Software',
+    isNew: true,
+    formats: ['Account Access', 'Email Delivery'],
+    downloads: 2340,
+    type: 'subscription',
+    description: 'Full Canva Premium access with all pro features, unlimited downloads, and premium templates.',
+    features: ['Unlimited Premium Templates', 'Brand Kit Access', 'Background Remover', 'Magic Resize', '100GB Cloud Storage'],
+    duration: '12 Months'
+  },
+  {
+    id: 2,
+    name: 'Google Gemini Pro Subscription',
+    price: 149,
+    originalPrice: 200,
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'AI Tools',
+    isNew: true,
+    formats: ['API Access', 'Account Setup'],
+    downloads: 890,
+    type: 'subscription',
+    description: 'Advanced AI assistant with multimodal capabilities for text, code, and image generation.',
+    features: ['Advanced AI Reasoning', 'Code Generation', 'Multimodal Input', 'Priority Support', 'Higher Rate Limits'],
+    duration: '12 Months'
+  },
+  {
+    id: 3,
+    name: 'Adobe Creative Suite Access',
+    price: 199,
+    originalPrice: 300,
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Software',
+    isNew: false,
+    formats: ['Account Access', 'Installation Guide'],
+    downloads: 1560,
+    type: 'subscription',
+    description: 'Complete Adobe Creative Cloud access including Photoshop, Illustrator, After Effects, and more.',
+    features: ['All Adobe Apps', 'Cloud Storage', 'Adobe Fonts', 'Premium Templates', 'Mobile Apps'],
+    duration: '6 Months'
+  },
+
+  // Gaming Content
+  {
+    id: 4,
+    name: 'Gaming Thumbnail Pack Pro',
+    price: 35,
+    originalPrice: 50,
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Gaming',
+    isNew: true,
+    formats: ['PSD', 'PNG', 'JPG'],
+    downloads: 3200,
+    type: 'digital',
+    description: 'Professional gaming thumbnails for YouTube, Twitch, and social media. Includes popular game styles.',
+    features: ['50+ Unique Designs', 'Editable PSD Files', 'Multiple Game Genres', 'YouTube Optimized', 'Social Media Ready'],
+    games: ['Fortnite', 'Minecraft', 'Call of Duty', 'Valorant', 'Among Us']
+  },
+  {
+    id: 5,
+    name: 'Streaming Overlay Bundle',
+    price: 45,
+    originalPrice: 70,
+    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Gaming',
+    isNew: false,
+    formats: ['OBS', 'Streamlabs', 'PNG'],
+    downloads: 1890,
+    type: 'digital',
+    description: 'Complete streaming setup with overlays, alerts, and panels for professional broadcasts.',
+    features: ['Stream Overlays', 'Alert Animations', 'Panel Designs', 'Webcam Frames', 'OBS Compatible'],
+    platforms: ['Twitch', 'YouTube', 'Facebook Gaming']
+  },
+
+  // Digital Books & Courses
+  {
+    id: 6,
+    name: 'Digital Marketing Mastery eBook',
+    price: 29,
+    originalPrice: 45,
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'eBooks',
+    isNew: true,
+    formats: ['PDF', 'EPUB', 'MOBI'],
+    downloads: 2100,
+    type: 'digital',
+    description: 'Comprehensive guide to digital marketing strategies, social media, and online business growth.',
+    features: ['300+ Pages', 'Case Studies', 'Templates Included', 'Video Tutorials', 'Lifetime Updates'],
+    chapters: 15
+  },
+  {
+    id: 7,
+    name: 'Streetwear Business Blueprint',
+    price: 39,
+    originalPrice: 60,
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Business',
+    isNew: true,
+    formats: ['PDF', 'Video Course'],
+    downloads: 980,
+    type: 'digital',
+    description: 'Complete guide to starting and scaling a successful streetwear brand from concept to profit.',
+    features: ['Business Plan Templates', 'Supplier Contacts', 'Marketing Strategies', 'Video Lessons', 'Community Access'],
+    modules: 12
+  },
+  {
+    id: 8,
+    name: 'Photography Preset Collection',
+    price: 25,
+    originalPrice: 40,
+    image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Photography',
+    isNew: false,
+    formats: ['LR', 'DNG', 'XMP'],
+    downloads: 4500,
+    type: 'digital',
+    description: 'Professional Lightroom presets for street photography, portraits, and urban landscapes.',
+    features: ['100+ Presets', 'Mobile Compatible', 'Video Tutorials', 'Before/After Examples', 'Commercial License'],
+    styles: ['Urban', 'Vintage', 'Moody', 'Bright', 'Film']
+  },
+
+  // Music & Audio
+  {
+    id: 9,
+    name: 'Lo-Fi Hip Hop Beat Pack',
+    price: 49,
+    originalPrice: 75,
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Music',
+    isNew: true,
+    formats: ['WAV', 'MP3', 'STEM'],
+    downloads: 1560,
+    type: 'digital',
+    description: 'High-quality lo-fi beats perfect for content creation, studying, and relaxation videos.',
+    features: ['25 Original Beats', 'Royalty-Free License', 'STEM Files Included', 'BPM Labeled', 'Commercial Use'],
+    bpm: '70-90 BPM',
+    duration: '2-4 minutes each'
+  },
+  {
+    id: 10,
+    name: 'Podcast Intro Music Bundle',
+    price: 35,
+    originalPrice: 55,
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Audio',
+    isNew: false,
+    formats: ['WAV', 'MP3'],
+    downloads: 890,
+    type: 'digital',
+    description: 'Professional podcast intros and outros for various niches and styles.',
+    features: ['30 Unique Tracks', 'Multiple Lengths', 'High Quality Audio', 'Royalty-Free', 'Instant Download'],
+    genres: ['Corporate', 'Tech', 'Lifestyle', 'Comedy', 'News']
+  },
+
+  // Design Assets
+  {
+    id: 11,
+    name: 'Social Media Template Mega Pack',
+    price: 59,
+    originalPrice: 90,
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Templates',
+    isNew: true,
+    formats: ['PSD', 'AI', 'Figma'],
+    downloads: 5670,
+    type: 'digital',
+    description: 'Massive collection of social media templates for Instagram, Facebook, Twitter, and LinkedIn.',
+    features: ['500+ Templates', 'All Social Platforms', 'Editable Text', 'Brand Guidelines', 'Video Tutorials'],
+    platforms: ['Instagram', 'Facebook', 'Twitter', 'LinkedIn', 'TikTok']
+  },
+  {
+    id: 12,
+    name: 'Logo Design Toolkit Pro',
+    price: 79,
+    originalPrice: 120,
+    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Branding',
+    isNew: true,
+    formats: ['AI', 'EPS', 'PNG', 'SVG'],
+    downloads: 2340,
+    type: 'digital',
+    description: 'Professional logo templates and design elements for creating stunning brand identities.',
+    features: ['200+ Logo Templates', 'Vector Format', 'Color Variations', 'Font Pairings', 'Brand Guidelines'],
+    industries: ['Tech', 'Fashion', 'Food', 'Fitness', 'Creative']
+  },
+
+  // Digital Services
+  {
+    id: 13,
+    name: 'Website Builder Pro Access',
+    price: 69,
+    originalPrice: 100,
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Web Tools',
+    isNew: false,
+    formats: ['Account Access', 'Templates'],
+    downloads: 1200,
+    type: 'subscription',
+    description: 'Premium website builder with professional templates and advanced features.',
+    features: ['Unlimited Websites', 'Premium Templates', 'E-commerce Ready', 'SEO Tools', 'Custom Domain'],
+    duration: '12 Months'
+  },
+  {
+    id: 14,
+    name: 'Stock Photo Lifetime Access',
+    price: 199,
+    originalPrice: 299,
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Photography',
+    isNew: true,
+    formats: ['JPG', 'PNG', 'RAW'],
+    downloads: 890,
+    type: 'subscription',
+    description: 'Unlimited access to premium stock photos, vectors, and illustrations.',
+    features: ['10M+ Images', 'Commercial License', 'High Resolution', 'Vector Graphics', 'Regular Updates'],
+    duration: 'Lifetime'
+  },
+
+  // NFT & Crypto
+  {
+    id: 15,
+    name: 'NFT Art Collection Generator',
+    price: 129,
+    originalPrice: 200,
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'NFT',
+    isNew: true,
+    formats: ['Software', 'Assets', 'Guide'],
+    downloads: 450,
+    type: 'digital',
+    description: 'Complete toolkit for generating unique NFT collections with traits and rarity systems.',
+    features: ['Generation Software', '1000+ Traits', 'Rarity Calculator', 'Metadata Generator', 'Tutorial Videos'],
+    collections: 'Up to 10,000 NFTs'
+  },
+
+  // Video Content
+  {
+    id: 16,
+    name: 'YouTube Shorts Template Pack',
+    price: 39,
+    originalPrice: 60,
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+    category: 'Video',
+    isNew: true,
+    formats: ['After Effects', 'Premiere Pro'],
+    downloads: 2890,
+    type: 'digital',
+    description: 'Viral-ready YouTube Shorts templates with trending effects and animations.',
+    features: ['50+ Templates', 'Trending Effects', 'Easy Customization', 'Music Included', 'Tutorial Videos'],
+    duration: '15-60 seconds'
+  }
+];
+
+export const categories = [
+  'All',
+  'Software',
+  'AI Tools',
+  'Gaming',
+  'eBooks',
+  'Business',
+  'Photography',
+  'Music',
+  'Audio',
+  'Templates',
+  'Branding',
+  'Web Tools',
+  'NFT',
+  'Video'
+];

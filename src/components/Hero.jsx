@@ -1,11 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { SignedIn, SignedOut, SignUpButton } from '@clerk/clerk-react';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiDownload, FiStar } = FiIcons;
 
 function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative bg-gradient-to-br from-cyan-50 via-purple-50 to-pink-50 overflow-hidden min-h-screen flex items-center">
       {/* Animated Background Elements */}
@@ -29,7 +33,7 @@ function Hero() {
                 <SafeIcon icon={FiStar} className="w-4 h-4" />
                 <span>Premium Digital Products</span>
               </div>
-              
+
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                   Digital
@@ -39,10 +43,10 @@ function Hero() {
                   Revolution
                 </span>
               </h1>
-              
+
               <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
-                Download premium digital assets, graphics, and design templates 
-                for your streetwear brand. Instant access, commercial license included.
+                Download premium digital assets, graphics, and design templates for your streetwear brand. 
+                Instant access, commercial license included.
               </p>
             </div>
 
@@ -50,20 +54,38 @@ function Hero() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/store')}
                 className="bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 hover:shadow-xl transition-all"
               >
                 <SafeIcon icon={FiDownload} className="w-5 h-5" />
                 <span>Browse Digital Store</span>
               </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-purple-300 bg-white/50 backdrop-blur-sm text-purple-700 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all flex items-center justify-center space-x-2"
-              >
-                <span>View Samples</span>
-                <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
-              </motion.button>
+
+              {/* Dynamic CTA based on auth state */}
+              <SignedOut>
+                <SignUpButton mode="modal">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="border-2 border-purple-300 bg-white/50 backdrop-blur-sm text-purple-700 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all flex items-center justify-center space-x-2"
+                  >
+                    <span>Join Free</span>
+                    <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
+                  </motion.button>
+                </SignUpButton>
+              </SignedOut>
+
+              <SignedIn>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate('/store')}
+                  className="border-2 border-purple-300 bg-white/50 backdrop-blur-sm text-purple-700 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all flex items-center justify-center space-x-2"
+                >
+                  <span>My Downloads</span>
+                  <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
+                </motion.button>
+              </SignedIn>
             </div>
 
             {/* Trust Indicators */}
