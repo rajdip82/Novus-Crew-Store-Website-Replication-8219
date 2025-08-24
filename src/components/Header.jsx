@@ -6,7 +6,7 @@ import SafeIcon from '../common/SafeIcon';
 import CurrencySelector from './CurrencySelector';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiMenu, FiX, FiShoppingCart, FiSearch, FiTrendingUp, FiShield } = FiIcons;
+const { FiMenu, FiX, FiShoppingCart, FiSearch, FiTrendingUp } = FiIcons;
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,12 +14,9 @@ function Header() {
   const navigate = useNavigate();
   const { user } = useUser();
 
-  // 🔐 PRODUCTION ADMIN ACCESS
-  const isAdmin = user?.primaryEmailAddress?.emailAddress === 'admin@novuscrew.com' || user?.publicMetadata?.role === 'admin';
-
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -40,9 +37,9 @@ function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-lg' 
+          ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg' 
           : 'bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-sm'
       }`}
       initial={{ y: -100 }}
@@ -50,37 +47,74 @@ function Header() {
       transition={{ duration: 0.8, type: "spring" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-20">
+          
+          {/* Logo - Enhanced visibility */}
           <motion.div
-            className="flex-shrink-0 cursor-pointer z-10"
+            className="flex-shrink-0 cursor-pointer z-50 relative"
             onClick={() => navigateTo('/')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <motion.h1
-              className={`text-2xl font-black transition-colors duration-300 ${
-                scrolled 
-                  ? 'bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent' 
-                  : 'text-white drop-shadow-lg'
-              }`}
+              className="text-2xl lg:text-3xl font-black transition-all duration-300"
               style={{
                 fontFamily: '"Inter", "SF Pro Display", -apple-system, system-ui, sans-serif',
                 fontWeight: '900',
                 letterSpacing: '-0.02em',
-                textShadow: scrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.3)',
+                color: scrolled ? '#1f2937' : '#ffffff',
+                textShadow: scrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.5)',
+                WebkitTextStroke: scrolled ? 'none' : '0.5px rgba(255,255,255,0.8)',
+                position: 'relative',
+                zIndex: 100,
               }}
             >
-              <span className="relative">
-                NOVUS
+              <span className="relative inline-block">
+                <span
+                  className="absolute inset-0 text-transparent"
+                  style={{
+                    background: scrolled ? 'linear-gradient(135deg, #0891b2, #7c3aed, #ec4899)' : 'rgba(255,255,255,0.95)',
+                    WebkitBackgroundClip: scrolled ? 'text' : 'none',
+                    backgroundClip: scrolled ? 'text' : 'none',
+                    borderRadius: '4px',
+                    padding: scrolled ? '0' : '2px 4px',
+                  }}
+                >
+                  NOVUS
+                </span>
+                <span
+                  className="relative z-10"
+                  style={{
+                    background: scrolled ? 'linear-gradient(135deg, #0891b2, #7c3aed, #ec4899)' : 'transparent',
+                    WebkitBackgroundClip: scrolled ? 'text' : 'none',
+                    backgroundClip: scrolled ? 'text' : 'none',
+                    WebkitTextFillColor: scrolled ? 'transparent' : '#ffffff',
+                    color: scrolled ? 'transparent' : '#ffffff',
+                  }}
+                >
+                  NOVUS
+                </span>
                 <motion.span
-                  className="absolute -top-1 -right-1 w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"
+                  className={`absolute -top-1 -right-1 w-2 h-2 rounded-full ${
+                    scrolled 
+                      ? 'bg-gradient-to-r from-cyan-400 to-purple-400' 
+                      : 'bg-gradient-to-r from-cyan-300 to-purple-300'
+                  }`}
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </span>
               {' '}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              <span
+                className="inline-block"
+                style={{
+                  background: scrolled ? 'linear-gradient(135deg, #7c3aed, #ec4899, #0891b2)' : 'transparent',
+                  WebkitBackgroundClip: scrolled ? 'text' : 'none',
+                  backgroundClip: scrolled ? 'text' : 'none',
+                  WebkitTextFillColor: scrolled ? 'transparent' : '#ffffff',
+                  color: scrolled ? 'transparent' : '#ffffff',
+                }}
+              >
                 CREW
               </span>
             </motion.h1>
@@ -118,7 +152,6 @@ function Header() {
                     {item.badge}
                   </motion.span>
                 )}
-                {/* Animated underline */}
                 <motion.div
                   className={`absolute bottom-0 left-0 h-0.5 rounded-full ${
                     scrolled 
@@ -131,41 +164,6 @@ function Header() {
                 />
               </motion.button>
             ))}
-
-            {/* Admin Panel Link - Only visible for admin users */}
-            <SignedIn>
-              {isAdmin && (
-                <motion.button
-                  onClick={() => navigateTo('/admin')}
-                  className={`relative font-medium transition-colors group ${
-                    scrolled 
-                      ? 'text-gray-700 hover:text-red-600' 
-                      : 'text-white/90 hover:text-white'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  title="Admin Panel"
-                >
-                  <span className="flex items-center space-x-1">
-                    <SafeIcon icon={FiShield} className="w-4 h-4" />
-                    <span>Admin</span>
-                  </span>
-                  <motion.span
-                    className="absolute -top-2 -right-6 bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs px-2 py-1 rounded-full text-[10px] font-bold"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    ADMIN
-                  </motion.span>
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded-full"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.button>
-              )}
-            </SignedIn>
           </nav>
 
           {/* Desktop Actions */}
@@ -223,6 +221,7 @@ function Header() {
                     Sign In
                   </motion.button>
                 </SignInButton>
+
                 <SignUpButton mode="modal">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -289,7 +288,7 @@ function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200 mt-2 rounded-b-2xl overflow-hidden shadow-lg"
+              className="lg:hidden bg-white/98 backdrop-blur-xl border-t border-gray-200 mt-2 rounded-b-2xl overflow-hidden shadow-xl"
             >
               <div className="py-4 space-y-2">
                 {navItems.map((item, index) => (
@@ -316,28 +315,6 @@ function Header() {
                   </motion.button>
                 ))}
 
-                {/* Mobile Admin Panel Link */}
-                <SignedIn>
-                  {isAdmin && (
-                    <motion.button
-                      onClick={() => navigateTo('/admin')}
-                      className="block w-full text-left text-gray-700 hover:text-red-600 font-medium px-6 py-3 hover:bg-red-50 transition-all rounded-xl mx-2"
-                      initial={{ opacity: 0, x: -50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: navItems.length * 0.1 }}
-                      whileHover={{ scale: 1.02, x: 10 }}
-                    >
-                      <span className="flex items-center space-x-2">
-                        <SafeIcon icon={FiShield} className="w-4 h-4" />
-                        <span>Admin Panel</span>
-                        <span className="bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs px-2 py-1 rounded-full">
-                          ADMIN
-                        </span>
-                      </span>
-                    </motion.button>
-                  )}
-                </SignedIn>
-
                 {/* Mobile Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200 mx-4">
                   <div className="flex items-center space-x-2">
@@ -348,6 +325,7 @@ function Header() {
                     >
                       <SafeIcon icon={FiSearch} className="w-5 h-5" />
                     </motion.button>
+                    
                     <motion.button
                       className="p-2 text-gray-600 hover:text-gray-900 transition-colors relative bg-gray-100 hover:bg-gray-200 rounded-full"
                       whileHover={{ scale: 1.1 }}
@@ -378,6 +356,7 @@ function Header() {
                       </SignUpButton>
                     </div>
                   </SignedOut>
+
                   <SignedIn>
                     <div className="flex items-center space-x-3 py-2">
                       <UserButton

@@ -13,6 +13,7 @@ import ProductPage from './components/ProductPage';
 import DigitalStore from './components/DigitalStore';
 import NCSellerPage from './components/NCSellerPage';
 import SellerDashboard from './components/SellerDashboard';
+import AdminLogin from './components/AdminLogin';
 import AdminPanel from './components/AdminPanel';
 import './App.css';
 
@@ -41,7 +42,9 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/nc-seller" element={<NCSellerPage />} />
           <Route path="/seller-dashboard" element={<SellerDashboard />} />
-          <Route path="/admin" element={<AdminPanel />} />
+          {/* 🔐 SECURE ADMIN ROUTES - FIXED ROUTING */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
         </Routes>
         <Footer />
       </div>
