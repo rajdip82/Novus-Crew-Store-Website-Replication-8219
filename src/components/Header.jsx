@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react';
 import SafeIcon from '../common/SafeIcon';
+import CurrencySelector from './CurrencySelector';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiShoppingCart, FiSearch, FiTrendingUp, FiShield } = FiIcons;
@@ -14,8 +15,7 @@ function Header() {
   const { user } = useUser();
 
   // 🔐 PRODUCTION ADMIN ACCESS
-  const isAdmin = user?.primaryEmailAddress?.emailAddress === 'admin@novuscrew.com' || 
-                  user?.publicMetadata?.role === 'admin';
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === 'admin@novuscrew.com' || user?.publicMetadata?.role === 'admin';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,13 +59,30 @@ function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <motion.h1
-              className={`text-2xl font-bold transition-colors duration-300 ${
+              className={`text-2xl font-black transition-colors duration-300 ${
                 scrolled 
                   ? 'bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent' 
                   : 'text-white drop-shadow-lg'
               }`}
+              style={{
+                fontFamily: '"Inter", "SF Pro Display", -apple-system, system-ui, sans-serif',
+                fontWeight: '900',
+                letterSpacing: '-0.02em',
+                textShadow: scrolled ? 'none' : '0 2px 4px rgba(0,0,0,0.3)',
+              }}
             >
-              NOVUS CREW
+              <span className="relative">
+                NOVUS
+                <motion.span
+                  className="absolute -top-1 -right-1 w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </span>
+              {' '}
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                CREW
+              </span>
             </motion.h1>
           </motion.div>
 
@@ -92,7 +109,6 @@ function Header() {
                   )}
                   <span>{item.name}</span>
                 </span>
-                
                 {item.badge && (
                   <motion.span
                     className="absolute -top-2 -right-8 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs px-2 py-1 rounded-full text-[10px] font-bold"
@@ -102,7 +118,6 @@ function Header() {
                     {item.badge}
                   </motion.span>
                 )}
-                
                 {/* Animated underline */}
                 <motion.div
                   className={`absolute bottom-0 left-0 h-0.5 rounded-full ${
@@ -135,7 +150,6 @@ function Header() {
                     <SafeIcon icon={FiShield} className="w-4 h-4" />
                     <span>Admin</span>
                   </span>
-                  
                   <motion.span
                     className="absolute -top-2 -right-6 bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs px-2 py-1 rounded-full text-[10px] font-bold"
                     animate={{ scale: [1, 1.1, 1] }}
@@ -143,7 +157,6 @@ function Header() {
                   >
                     ADMIN
                   </motion.span>
-                  
                   <motion.div
                     className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-red-400 to-pink-500 rounded-full"
                     initial={{ width: 0 }}
@@ -156,7 +169,8 @@ function Header() {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
+            {/* Search Button */}
             <motion.button
               className={`p-2 transition-colors rounded-full ${
                 scrolled 
@@ -169,7 +183,8 @@ function Header() {
             >
               <SafeIcon icon={FiSearch} className="w-5 h-5" />
             </motion.button>
-            
+
+            {/* Cart Button */}
             <motion.button
               className={`p-2 transition-colors relative rounded-full ${
                 scrolled 
@@ -189,6 +204,9 @@ function Header() {
               </motion.span>
             </motion.button>
 
+            {/* Currency Selector */}
+            <CurrencySelector />
+
             {/* Auth Buttons */}
             <div className="flex items-center space-x-3">
               <SignedOut>
@@ -205,7 +223,6 @@ function Header() {
                     Sign In
                   </motion.button>
                 </SignInButton>
-                
                 <SignUpButton mode="modal">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -216,7 +233,7 @@ function Header() {
                   </motion.button>
                 </SignUpButton>
               </SignedOut>
-              
+
               <SignedIn>
                 <motion.div
                   className="flex items-center space-x-3"
@@ -224,7 +241,7 @@ function Header() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <UserButton 
+                  <UserButton
                     appearance={{
                       elements: {
                         avatarBox: "w-9 h-9 rounded-full ring-2 ring-purple-200 hover:ring-purple-300 transition-all"
@@ -238,7 +255,7 @@ function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center space-x-2">
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`p-2 transition-colors rounded-full ${
@@ -320,25 +337,29 @@ function Header() {
                     </motion.button>
                   )}
                 </SignedIn>
-                
-                <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 mx-4">
-                  <motion.button
-                    className="p-2 text-gray-600 hover:text-gray-900 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full"
-                    whileHover={{ scale: 1.1, rotate: 360 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <SafeIcon icon={FiSearch} className="w-5 h-5" />
-                  </motion.button>
-                  <motion.button
-                    className="p-2 text-gray-600 hover:text-gray-900 transition-colors relative bg-gray-100 hover:bg-gray-200 rounded-full"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <SafeIcon icon={FiShoppingCart} className="w-5 h-5" />
-                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      0
-                    </span>
-                  </motion.button>
+
+                {/* Mobile Actions */}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-200 mx-4">
+                  <div className="flex items-center space-x-2">
+                    <motion.button
+                      className="p-2 text-gray-600 hover:text-gray-900 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full"
+                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <SafeIcon icon={FiSearch} className="w-5 h-5" />
+                    </motion.button>
+                    <motion.button
+                      className="p-2 text-gray-600 hover:text-gray-900 transition-colors relative bg-gray-100 hover:bg-gray-200 rounded-full"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <SafeIcon icon={FiShoppingCart} className="w-5 h-5" />
+                      <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        0
+                      </span>
+                    </motion.button>
+                  </div>
+                  <CurrencySelector />
                 </div>
 
                 {/* Mobile Auth */}
@@ -357,10 +378,9 @@ function Header() {
                       </SignUpButton>
                     </div>
                   </SignedOut>
-                  
                   <SignedIn>
                     <div className="flex items-center space-x-3 py-2">
-                      <UserButton 
+                      <UserButton
                         appearance={{
                           elements: {
                             avatarBox: "w-8 h-8 rounded-full ring-2 ring-purple-200"

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { SignedIn, SignedOut, SignUpButton } from '@clerk/clerk-react';
+import { useCurrency } from '../hooks/useCurrency';
 import SafeIcon from '../common/SafeIcon';
 import CheckoutModal from './CheckoutModal';
 import * as FiIcons from 'react-icons/fi';
@@ -10,6 +11,7 @@ const { FiHeart, FiDownload, FiEye, FiFile, FiClock, FiUsers, FiStar, FiLock, Fi
 
 function ProductCard({ product, index }) {
   const navigate = useNavigate();
+  const { formatPrice } = useCurrency();
   const [showCheckout, setShowCheckout] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -98,7 +100,7 @@ function ProductCard({ product, index }) {
             className={`absolute top-16 right-4 p-2 rounded-full shadow-md transition-all ${
               isWishlisted 
                 ? 'bg-red-500 text-white' 
-                : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-red-50 hover:text-red-500'
+                : 'bg-white/90 text-gray-700 hover:bg-red-50 hover:text-red-500'
             }`}
           >
             <SafeIcon icon={FiHeart} className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
@@ -118,7 +120,6 @@ function ProductCard({ product, index }) {
                   <span>Buy Now</span>
                 </motion.button>
               </SignedIn>
-
               <SignedOut>
                 <SignUpButton mode="modal">
                   <motion.button
@@ -132,7 +133,6 @@ function ProductCard({ product, index }) {
                   </motion.button>
                 </SignUpButton>
               </SignedOut>
-
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -189,13 +189,14 @@ function ProductCard({ product, index }) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                ${product.price}
+                {formatPrice(product.price)}
               </span>
               {product.originalPrice > product.price && (
-                <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+                <span className="text-sm text-gray-500 line-through">
+                  {formatPrice(product.originalPrice)}
+                </span>
               )}
             </div>
-
             {product.type === 'subscription' && (
               <span className="text-xs bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-2 py-1 rounded-full border border-green-200">
                 Subscription
